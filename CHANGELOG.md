@@ -1,5 +1,9 @@
 # Alteraçções no projeto
 
+# v0.0.3
+- As funções passaram para arquivos individuais no diretório `/controllers`
+- As rotas rotam alteradas para `/process/customers`
+
 # v0.0.2
 - Adicão do _cache_ de CNPJ utilizando o _Redis_
 - Adição da validação do cnpj no post
