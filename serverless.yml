@@ -1,0 +1,31 @@
+service: serverless-node-interview
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  get-cnpj:
+    handler: cnpj.get
+    events:
+      - httpApi:
+          path: /cnpj
+          method: get
+  post-cnpj:
+    handler: cnpj.post
+    events:
+      - httpApi:
+          path: /cnpj
+          method: post
+
+  popula-cnpj:
+    handler: cnpj.popula
+    events:
+      - schedule: rate(1 minute)
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-offline-redis-server
+  - serverless-mongodb-local
