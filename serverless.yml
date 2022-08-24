@@ -6,21 +6,21 @@ provider:
   runtime: nodejs14.x
 
 functions:
-  get-cnpj:
-    handler: cnpj.get
+  get:
+    handler: controllers/get.handler # cnpj.get
     events:
       - httpApi:
-          path: /cnpj
+          path: /process/customers
           method: get
-  post-cnpj:
-    handler: cnpj.post
+  post:
+    handler: controllers/post.handler
     events:
       - httpApi:
-          path: /cnpj
+          path: /process/customers
           method: post
 
-  popula-cnpj:
-    handler: cnpj.popula
+  process:
+    handler: controllers/process.handler
     events:
       - schedule: rate(1 minute)
 
