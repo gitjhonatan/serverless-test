@@ -6,7 +6,7 @@ const CNPJModel = new Schema({
     id: String,
     cnpj: String,
     status: String,
-    data: Object
+    data: Object,
 })
 
 export default model<MongoRegistro>('cnpj', CNPJModel)
