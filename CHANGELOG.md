@@ -1,5 +1,10 @@
 # Alteraçções no projeto
 
+# v0.0.4
+- Adicionado o Swagger no projeto via docker-compose e criada a documentação da api
+- Corrigido os status dos retornos
+
+
 # v0.0.3
 - As funções passaram para arquivos individuais no diretório `/controllers`
 - As rotas rotam alteradas para `/process/customers`

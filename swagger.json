@@ -1,0 +1,301 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Serverless Test",
+        "description": "Documentação da API",
+        "contact": {
+            "email": "jhonatan.lima105@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "sandbox"
+        }
+    ],
+    "paths": {
+        "/process/customers": {
+            "post": {
+                "summary": "Postagem de CNPJ",
+                "description": "Postagem das informações a serem processadas",
+                "tags": [
+                    "Processo"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/post_processo"
+                            },
+                            "examples": {
+                                "Postagem ": {
+                                    "value": {
+                                        "id": "ujoi089uru",
+                                        "name": "exemplo",
+                                        "cnpj": "31327730000125"
+                                    }
+                                },
+                                "Postagem 2": {
+                                    "value": {
+                                        "id": "3pOik4iP8",
+                                        "name": "exemplo 2",
+                                        "cnpj": "06.990.590/0001-23"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/status_processo"
+                                },
+                                "examples": {
+                                    "Novo Registro": {
+                                        "value": {
+                                            "message": "Registro criado",
+                                            "data": {
+                                                "_id": "6307f992edc3eff6a543de60",
+                                                "id": "asdasdasdasd",
+                                                "name": "asdasdaasdasads",
+                                                "cnpj": "31327730000125",
+                                                "status": "Aguardando Processamento",
+                                                "data": {}
+                                            }
+                                        }
+                                    },
+                                    "Registro já criado": {
+                                        "value": {
+                                            "message": "Registro já postado",
+                                            "data": {
+                                                "_id": "6307f992edc3eff6a543de60",
+                                                "id": "asdasdasdasd",
+                                                "cnpj": "31327730000125",
+                                                "status": "Aguardando Processamento",
+                                                "__v": 0
+                                            }
+                                        }
+                                    },
+                                    "Registro já processado": {
+                                        "message": "Registro já postado",
+                                        "data": {
+                                            "_id": "6307f992edc3eff6a543de60",
+                                            "id": "asdasdasdasd",
+                                            "cnpj": "31327730000125",
+                                            "status": "OK",
+                                            "__v": 0,
+                                            "data": {
+                                                "atividade_principal": [
+                                                    {
+                                                        "text": "Comércio varejista de artigos do vestuário e acessórios",
+                                                        "code": "47.81-4-00"
+                                                    }
+                                                ],
+                                                "data_situacao": "24/08/2018",
+                                                "tipo": "MATRIZ",
+                                                "nome": "SWAGGER COMERCIO DE ROUPAS E ACESSORIOS PARA VESTUARIO LTDA",
+                                                "uf": "PR",
+                                                "telefone": "(41) 9625-2494",
+                                                "email": "ernanidgp@gmail.com",
+                                                "atividades_secundarias": [
+                                                    {
+                                                        "text": "Confecção de peças de vestuário, exceto roupas íntimas e as confeccionadas sob medida",
+                                                        "code": "14.12-6-01"
+                                                    }
+                                                ],
+                                                "qsa": [
+                                                    {
+                                                        "nome": "ERNANI DUARTE GOMES PEREIRA",
+                                                        "qual": "49-Sócio-Administrador"
+                                                    },
+                                                    {
+                                                        "nome": "LUIS FELIPE WOELLNER DUARTE PEREIRA",
+                                                        "qual": "49-Sócio-Administrador"
+                                                    }
+                                                ],
+                                                "situacao": "ATIVA",
+                                                "bairro": "GUAIRA",
+                                                "logradouro": "R PIAUI",
+                                                "numero": "1937",
+                                                "cep": "80.630-300",
+                                                "municipio": "CURITIBA",
+                                                "fantasia": "SWAGGER",
+                                                "porte": "MICRO EMPRESA",
+                                                "abertura": "24/08/2018",
+                                                "natureza_juridica": "206-2 - Sociedade Empresária Limitada",
+                                                "cnpj": "31.327.730/0001-25",
+                                                "ultima_atualizacao": "2022-08-03T18:33:11.105Z",
+                                                "status": "OK",
+                                                "complemento": "",
+                                                "efr": "",
+                                                "motivo_situacao": "",
+                                                "situacao_especial": "",
+                                                "data_situacao_especial": "",
+                                                "capital_social": "20000.00",
+                                                "billing": {
+                                                    "free": true,
+                                                    "database": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Busca de Registro",
+                "description": "Pesquisa registro através do id do documento",
+                "tags": [
+                    "Processo"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Id do documento no MongoDB"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/status_processo"
+                                },
+                                "examples": {
+                                    "Registro Encontrado": {
+                                        "value": {
+                                            "message": "Registro encontrado",
+                                            "data": {
+                                                "_id": "6307f992edc3eff6a543de60",
+                                                "id": "asdasdasdasd",
+                                                "cnpj": "31327730000125",
+                                                "status": "OK",
+                                                "__v": 0,
+                                                "data": {
+                                                    "atividade_principal": [
+                                                        {
+                                                            "text": "Comércio varejista de artigos do vestuário e acessórios",
+                                                            "code": "47.81-4-00"
+                                                        }
+                                                    ],
+                                                    "data_situacao": "24/08/2018",
+                                                    "tipo": "MATRIZ",
+                                                    "nome": "SWAGGER COMERCIO DE ROUPAS E ACESSORIOS PARA VESTUARIO LTDA",
+                                                    "uf": "PR",
+                                                    "telefone": "(41) 9625-2494",
+                                                    "email": "ernanidgp@gmail.com",
+                                                    "atividades_secundarias": [
+                                                        {
+                                                            "text": "Confecção de peças de vestuário, exceto roupas íntimas e as confeccionadas sob medida",
+                                                            "code": "14.12-6-01"
+                                                        }
+                                                    ],
+                                                    "qsa": [
+                                                        {
+                                                            "nome": "ERNANI DUARTE GOMES PEREIRA",
+                                                            "qual": "49-Sócio-Administrador"
+                                                        },
+                                                        {
+                                                            "nome": "LUIS FELIPE WOELLNER DUARTE PEREIRA",
+                                                            "qual": "49-Sócio-Administrador"
+                                                        }
+                                                    ],
+                                                    "situacao": "ATIVA",
+                                                    "bairro": "GUAIRA",
+                                                    "logradouro": "R PIAUI",
+                                                    "numero": "1937",
+                                                    "cep": "80.630-300",
+                                                    "municipio": "CURITIBA",
+                                                    "fantasia": "SWAGGER",
+                                                    "porte": "MICRO EMPRESA",
+                                                    "abertura": "24/08/2018",
+                                                    "natureza_juridica": "206-2 - Sociedade Empresária Limitada",
+                                                    "cnpj": "31.327.730/0001-25",
+                                                    "ultima_atualizacao": "2022-08-03T18:33:11.105Z",
+                                                    "status": "OK",
+                                                    "complemento": "",
+                                                    "efr": "",
+                                                    "motivo_situacao": "",
+                                                    "situacao_especial": "",
+                                                    "data_situacao_especial": "",
+                                                    "capital_social": "20000.00",
+                                                    "billing": {
+                                                        "free": true,
+                                                        "database": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "post_processo": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "cnpj": {
+                        "type": "string"
+                    }
+                }
+            },
+            "status_processo": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "_id": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "cnpj": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            },
+                            "data": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

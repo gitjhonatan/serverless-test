@@ -23,7 +23,7 @@ functions:
     handler: controllers/process.handler
     events:
       - schedule: rate(1 minute)
-
+      
 plugins:
   - serverless-plugin-typescript
   - serverless-offline

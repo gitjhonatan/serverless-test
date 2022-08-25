@@ -10,6 +10,7 @@ export const handler: Handler = async (req) => {
     if (!id || !name || !cnpj)
         return new Promise((resolve) => {
             resolve({
+                statusCode: 400,
                 body: JSON.stringify({
                     "message": "Faltando campos obrigatórios"
                 })
@@ -19,6 +20,7 @@ export const handler: Handler = async (req) => {
     if (!validateCNPJ(numeros_cnpj))
         return new Promise((resolve) => {
             resolve({
+                statusCode: 400,
                 body: JSON.stringify({
                     "message": "CNPJ inválido"
                 })
@@ -46,8 +48,12 @@ export const handler: Handler = async (req) => {
     const { _id } = await CNPJModel.create(redis_objeto)
 
     const response = {
-        message: "Registro ciado",
-        data: { _id, ...redis_objeto }
+        statusCode: 202,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            message: "Registro ciado",
+            data: { _id, ...redis_objeto }
+        }),
     };
 
     return new Promise((resolve) => {
