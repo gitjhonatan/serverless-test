@@ -1,6 +1,6 @@
 # Alteraçções no projeto
 
-# v0.0.4
+# v1.0.0
 - Adicionado o Swagger no projeto via docker-compose e criada a documentação da api
 - Corrigido os status dos retornos
 
